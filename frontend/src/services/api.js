@@ -1,5 +1,7 @@
 import axios from "axios";
 
-export default axios.create({
-    baseURL: "finance-tracker-production-ba0e.up.railway.app"
+const api = axios.create({
+    baseURL: "https://finance-tracker-production-ba0e.up.railway.app/api"
 });
+
+export default api;
