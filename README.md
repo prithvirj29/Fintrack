@@ -6,7 +6,7 @@ A full-stack Personal Finance Tracker built using **React.js**, **Spring Boot**,
 
 ## 🚀 Live Demo
 
-Frontend: https://finance-tracker-rho-steel.vercel.app
+Frontend: https://my-finance-trackerl.vercel.app/
 
 > Backend is built using Spring Boot REST APIs.
 
