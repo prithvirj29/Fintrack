@@ -59,7 +59,6 @@ if (onTransactionAdded) {
 }
 
             // Temporary refresh so dashboard + table update
-            window.location.reload();
 
         } catch (error) {
 
