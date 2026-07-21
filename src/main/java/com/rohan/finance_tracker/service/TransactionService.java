@@ -38,31 +38,51 @@ public class TransactionService {
     // GET CURRENT LOGGED-IN USER
     // ==========================================
 
-    private User getCurrentUser() {
+private User getCurrentUser() {
 
-        Authentication authentication =
-                SecurityContextHolder
-                        .getContext()
-                        .getAuthentication();
+    Authentication authentication =
+            SecurityContextHolder
+                    .getContext()
+                    .getAuthentication();
 
-        if (authentication == null ||
-                !authentication.isAuthenticated()) {
-
-            throw new RuntimeException(
-                    "User is not authenticated"
-            );
-        }
-
-        String email = authentication.getName();
-
-        return userRepository
-                .findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Authenticated user not found: " + email
-                        )
-                );
+    if (authentication == null) {
+        throw new RuntimeException(
+                "Authentication is null"
+        );
     }
+
+    String email = authentication.getName();
+
+    System.out.println(
+            "======================================"
+    );
+
+    System.out.println(
+            "AUTHENTICATED EMAIL = " + email
+    );
+
+    User user = userRepository
+            .findByEmail(email)
+            .orElseThrow(() ->
+                    new RuntimeException(
+                            "Authenticated user not found: " + email
+                    )
+            );
+
+    System.out.println(
+            "CURRENT USER ID = " + user.getId()
+    );
+
+    System.out.println(
+            "CURRENT USER EMAIL = " + user.getEmail()
+    );
+
+    System.out.println(
+            "======================================"
+    );
+
+    return user;
+}
 
 
     // ==========================================
