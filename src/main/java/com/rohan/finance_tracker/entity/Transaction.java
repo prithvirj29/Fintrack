@@ -1,4 +1,4 @@
-package com.rohan.finance_tracker.entity;
+  package com.rohan.finance_tracker.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
