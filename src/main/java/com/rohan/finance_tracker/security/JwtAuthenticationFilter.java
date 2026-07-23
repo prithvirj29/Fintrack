@@ -56,6 +56,14 @@ public class JwtAuthenticationFilter
                         "Authorization"
                 );
 
+        // Temporary debugging
+        System.out.println(
+                "===================================================="
+        );
+        System.out.println(
+                "Authorization Header = " + authorizationHeader
+        );
+
 
         // ======================================
         // 2. CHECK WHETHER BEARER TOKEN EXISTS
@@ -67,6 +75,11 @@ public class JwtAuthenticationFilter
                 !authorizationHeader
                         .startsWith("Bearer ")
         ) {
+
+            // Temporary debugging
+            System.out.println(
+                    "No Bearer token found on request. Skipping JWT authentication."
+            );
 
             filterChain.doFilter(
                     request,
@@ -88,14 +101,21 @@ public class JwtAuthenticationFilter
 
         try {
 
+            // Temporary debugging
+            boolean tokenValid =
+                    jwtService
+                            .isTokenValid(token);
+
+            System.out.println(
+                    "Token exists = true, Token valid = " + tokenValid
+            );
 
             // ==================================
             // 4. VALIDATE JWT
             // ==================================
 
             if (
-                    jwtService
-                            .isTokenValid(token)
+                    tokenValid
             ) {
 
 
@@ -150,6 +170,21 @@ public class JwtAuthenticationFilter
                                 authentication
                         );
 
+                // Temporary debugging
+                System.out.println(
+                        "Authentication set in SecurityContext = "
+                                + SecurityContextHolder
+                                        .getContext()
+                                        .getAuthentication()
+                );
+
+            } else {
+
+                // Temporary debugging
+                System.out.println(
+                        "Token validation failed. Authentication NOT set."
+                );
+
             }
 
 
@@ -159,6 +194,8 @@ public class JwtAuthenticationFilter
                     "JWT Authentication Error: "
                             + e.getMessage()
             );
+
+            e.printStackTrace();
 
         }
 

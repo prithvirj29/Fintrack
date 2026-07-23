@@ -45,6 +45,29 @@ private User getCurrentUser() {
                     .getContext()
                     .getAuthentication();
 
+    System.out.println(
+            "======================================"
+    );
+
+    // Temporary debugging
+    System.out.println(
+            "AUTHENTICATION OBJECT = " + authentication
+    );
+
+    if (authentication != null) {
+
+        // Temporary debugging
+        System.out.println(
+                "AUTHENTICATION IS AUTHENTICATED = "
+                        + authentication.isAuthenticated()
+        );
+
+        System.out.println(
+                "AUTHENTICATION PRINCIPAL = "
+                        + authentication.getPrincipal()
+        );
+    }
+
     if (authentication == null) {
         throw new RuntimeException(
                 "Authentication is null"
@@ -54,11 +77,16 @@ private User getCurrentUser() {
     String email = authentication.getName();
 
     System.out.println(
-            "======================================"
+            "AUTHENTICATED EMAIL = " + email
     );
 
+    boolean userExists = userRepository
+            .findByEmail(email)
+            .isPresent();
+
+    // Temporary debugging
     System.out.println(
-            "AUTHENTICATED EMAIL = " + email
+            "USER FOUND IN DATABASE = " + userExists
     );
 
     User user = userRepository
