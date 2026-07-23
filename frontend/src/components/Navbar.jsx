@@ -8,6 +8,31 @@ function Navbar() {
 
     };
 
+    const getUserInitial = () => {
+
+        const token = localStorage.getItem("token");
+
+        if (!token) return "U";
+
+        try {
+            const payload = token.split(".")[1];
+            const decoded = JSON.parse(
+                atob(payload.replace(/-/g, "+").replace(/_/g, "/"))
+            );
+
+            // JWT subject contains email per backend implementation
+            const subject = decoded.sub || decoded.subject || decoded.email || "";
+
+            return subject ? subject.charAt(0).toUpperCase() : "U";
+
+        } catch (e) {
+            return "U";
+        }
+
+    };
+
+    const initial = getUserInitial();
+
     return (
 
         <nav className="navbar">
@@ -30,7 +55,7 @@ function Navbar() {
                 <div className="navbar-actions">
 
                     <div className="user-avatar">
-                        R
+                        {initial}
                     </div>
 
                     <button

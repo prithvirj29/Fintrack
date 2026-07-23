@@ -13,16 +13,18 @@ function SummaryCards({ refreshKey }) {
 
 useEffect(() => {
     loadDashboard();
-}, []);
+}, [refreshKey]);
 
     const loadDashboard = async () => {
+
+        setLoading(true);
 
         try {
 
             const response =
                 await api.get("/transactions/dashboard");
 
-            setSummary(response.data);
+            setSummary(response.data || {});
 
         } catch (error) {
 
