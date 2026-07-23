@@ -89,6 +89,10 @@ function TransactionTable({ refreshKey }) {
             // Immediately reload transactions
             await loadTransactions();
 
+            if (typeof onTransactionChanged === "function") {
+                onTransactionChanged();
+            }
+
         } catch (error) {
 
             console.error(
@@ -179,6 +183,10 @@ function TransactionTable({ refreshKey }) {
 
             // Reload updated transactions
             await loadTransactions();
+
+            if (typeof onTransactionChanged === "function") {
+                onTransactionChanged();
+            }
 
         } catch (error) {
 
